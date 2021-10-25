@@ -1,21 +1,88 @@
+const { Command } = require('commander');
+
+const contactsOperations = require('./contacts/contacts');
+
+const program = new Command();
+program
+  .option('-a, --action <type>', 'choose action')
+  .option('-i, --id <type>', 'user id')
+  .option('-n, --name <type>', 'user name')
+  .option('-e, --email <type>', 'user email')
+  .option('-p, --phone <type>', 'user phone');
+
+program.parse(process.argv);
+
+const argv = program.opts();
+
+const invokeAction = async ({ action, id, name, email, phone }) => {
+  switch (action) {
+    case 'list':
+      const contactsList = await contactsOperations.listContacts();
+      console.table(contactsList);
+      break;
+
+    case 'get':
+      const contactById = await contactsOperations.getContactById(id);
+      if (contactById) {
+        console.table(contactById);
+      } else {
+        throw new Error('contact not found');
+      }
+      break;
+
+    case 'add':
+      const newContact = await contactsOperations.addContact(
+        name,
+        email,
+        phone,
+      );
+      console.table(newContact);
+      break;
+
+    case 'remove':
+      const contact = await contactsOperations.removeContact(id);
+      console.table(contact);
+      break;
+
+    default:
+      console.warn('\x1B[31m Unknown action type!');
+  }
+};
+
+invokeAction(argv);
+
+/*
+
 const contactsOperations = require('./contacts/contacts');
 
 const invokeAction = async ({ action, id, name, email, phone }) => {
   switch (action) {
     case 'list':
-      await contactsOperations.listContacts();
+      const contactsList = await contactsOperations.listContacts();
+      console.table(contactsList);
       break;
 
     case 'get':
-      // ... id
+      const contactById = await contactsOperations.getContactById(id);
+      if (contactById) {
+        console.table(contactById);
+      } else {
+        throw new Error('contact not found');
+      }
       break;
 
     case 'add':
-      // ... name email phone
+      const newContact = await contactsOperations.addContact(
+        name,
+        email,
+        phone,
+      );
+      console.table(newContact);
       break;
 
     case 'remove':
-      // ... id
+      const contact = await contactsOperations.removeContact(id);
+      console.table(contact);
       break;
 
     default:
@@ -24,3 +91,4 @@ const invokeAction = async ({ action, id, name, email, phone }) => {
 };
 
 invokeAction({ action: 'list' });
+*/
