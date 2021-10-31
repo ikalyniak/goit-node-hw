@@ -1,6 +1,6 @@
 const fs = require('fs/promises');
 
-const contactsPath = require('./contactsPath');
+const contactsPath = require('./contacts.json');
 
 const updateAllContacts = async newContacts => {
   const contactsToString = JSON.stringify(newContacts);
