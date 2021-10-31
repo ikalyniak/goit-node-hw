@@ -1,6 +1,6 @@
 const express = require('express');
 // const createError = require('http-errors');
-const { NotFound, BadRequest } = require('http-errors');
+const { NotFound, BadRequest, Conflict } = require('http-errors');
 const Joi = require('joi');
 
 const contactsOperations = require('../../model/index');
@@ -53,19 +53,30 @@ router.get('/:contactId', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    // console.log(req.body);
+    console.log(req.body);
     const { error } = joiSchema.validate(req.body);
     if (error) {
       throw new BadRequest(error.message);
     }
-    const result = await contactsOperations.addContact(req.body);
-    res.status(201).json({
-      status: 'success',
-      code: 201,
-      data: {
-        result,
-      },
+
+    const { name, email, phone } = req.body;
+    const list = await contactsOperations.listContacts();
+
+    // console.log(list.map(item => item.name));
+    list.map(item => {
+      if (item.name === name) {
+        throw new Conflict(`Contact with name:${name} already exist`);
+      }
+      if (item.email === email) {
+        throw new Conflict(`Contact with email:${email} already exist`);
+      }
+      if (item.phone === phone) {
+        throw new Conflict(`Contact with phone:${phone} already exist`);
+      }
     });
+
+    const result = await contactsOperations.addContact(req.body);
+    successfulResponse(res, result, 201);
   } catch (error) {
     next(error);
   }
