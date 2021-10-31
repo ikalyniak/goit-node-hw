@@ -2,7 +2,7 @@ const express = require('express');
 const Joi = require('joi');
 
 const contactsOperations = require('../../model/index');
-const successfulResponseHelper = require('../helpers/successfulResponse');
+const successHelper = require('../helpers/success');
 const errorsHelper = require('../helpers/errors');
 
 const router = express.Router();
@@ -15,7 +15,7 @@ const joiSchema = Joi.object({
 router.get('/', async (req, res, next) => {
   try {
     const result = await contactsOperations.listContacts();
-    successfulResponseHelper(res, result);
+    successHelper.successfulResponse(res, result);
   } catch (error) {
     next(error);
   }
@@ -26,7 +26,7 @@ router.get('/:contactId', async (req, res, next) => {
     const { contactId } = req.params;
     const result = await contactsOperations.getContactById(contactId);
     errorsHelper.notFound(result, contactId);
-    successfulResponseHelper(res, result);
+    successHelper.successfulResponse(res, result);
   } catch (error) {
     next(error);
   }
@@ -41,14 +41,21 @@ router.post('/', async (req, res, next) => {
     errorsHelper.conflict(req, list);
 
     const result = await contactsOperations.addContact(req.body);
-    successfulResponseHelper(res, result, 201);
+    successHelper.successfulResponse(res, result, 201);
   } catch (error) {
     next(error);
   }
 });
 
 router.delete('/:contactId', async (req, res, next) => {
-  //
+  try {
+    const { contactId } = req.params;
+    const result = await contactsOperations.removeContact(contactId);
+    errorsHelper.notFound(result, contactId);
+    successHelper.successfulDeletion(res);
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.put('/:contactId', async (req, res, next) => {
@@ -59,7 +66,7 @@ router.put('/:contactId', async (req, res, next) => {
     const { contactId } = req.params;
     const result = await contactsOperations.updateContact(contactId, req.body);
     errorsHelper.notFound(result, contactId);
-    successfulResponseHelper(res, result);
+    successHelper.successfulResponse(res, result);
   } catch (error) {
     next(error);
   }
