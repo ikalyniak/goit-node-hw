@@ -1,11 +1,17 @@
 const express = require('express');
 // const createError = require('http-errors');
 const { NotFound, BadRequest } = require('http-errors');
+const Joi = require('joi');
 
 const contactsOperations = require('../../model/index');
 const successfulResponse = require('./successfulResponse');
 
 const router = express.Router();
+const joiSchema = Joi.object({
+  name: Joi.string().required(),
+  email: Joi.string().email().required(),
+  phone: Joi.string().required(),
+});
 
 router.get('/', async (req, res, next) => {
   try {
@@ -48,6 +54,10 @@ router.get('/:contactId', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     // console.log(req.body);
+    const { error } = joiSchema.validate(req.body);
+    if (error) {
+      throw new BadRequest(error.message);
+    }
     const result = await contactsOperations.addContact(req.body);
     res.status(201).json({
       status: 'success',
