@@ -1,5 +1,5 @@
 const joiSchema = require('../helpers/addValidation');
-const contactsOperations = require('../../model/index');
+const contactsOperations = require('../../models/index');
 const successHelper = require('../helpers/success');
 const errorsHelper = require('../helpers/errors');
 

@@ -1,4 +1,4 @@
-const contactsOperations = require('../../model/index');
+const contactsOperations = require('../../models/index');
 const successHelper = require('../helpers/success');
 
 const getListContactsApi = () => async (_, res, next) => {
