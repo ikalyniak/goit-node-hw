@@ -1,4 +1,5 @@
-const { NotFound, BadRequest, Conflict } = require('http-errors');
+// const { NotFound, BadRequest, Conflict } = require('http-errors');
+const { NotFound, Conflict } = require('http-errors');
 
 const notFound = (result, contactId) => {
   if (!result) {
@@ -6,11 +7,11 @@ const notFound = (result, contactId) => {
   }
 };
 
-const badRequest = error => {
-  if (error) {
-    throw new BadRequest(error.message);
-  }
-};
+// const badRequest = error => {
+//   if (error) {
+//     throw new BadRequest(error.message);
+//   }
+// };
 
 const conflict = (req, list) => {
   const { name, email, phone } = req.body;
@@ -29,6 +30,6 @@ const conflict = (req, list) => {
 
 module.exports = {
   notFound,
-  badRequest,
+  // badRequest,
   conflict,
 };
