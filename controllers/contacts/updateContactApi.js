@@ -1,4 +1,3 @@
-// const { joiSchemaContacts } = require('../../middlewares/validations/index');
 const contactsOperations = require('../../models/contacts/index');
 const successHelper = require('../../helpers/success');
 const errorsHelper = require('../../helpers/errors');
