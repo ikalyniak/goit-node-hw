@@ -1,7 +1,7 @@
-const joiSchema = require('../helpers/addValidation');
-const contactsOperations = require('../../models/index');
-const successHelper = require('../helpers/success');
-const errorsHelper = require('../helpers/errors');
+const joiSchema = require('../../middlewares/validation/addValidation');
+const contactsOperations = require('../../models/contacts/index');
+const successHelper = require('../../helpers/success');
+const errorsHelper = require('../../helpers/errors');
 
 const addContactApi = () => async (req, res, next) => {
   try {

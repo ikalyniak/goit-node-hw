@@ -1,6 +1,6 @@
-const contactsOperations = require('../../models/index');
-const successHelper = require('../helpers/success');
-const errorsHelper = require('../helpers/errors');
+const contactsOperations = require('../../models/contacts/index');
+const successHelper = require('../../helpers/success');
+const errorsHelper = require('../../helpers/errors');
 
 const removeContactApi = () => async (req, res, next) => {
   try {
