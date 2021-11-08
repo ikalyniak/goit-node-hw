@@ -1,8 +1,8 @@
-const contactsOperations = require('../../models/contacts');
+const { Contact } = require('../../models');
 const successHelper = require('../../helpers/success');
 
 const getListContactsApi = async (_, res) => {
-  const result = await contactsOperations.listContacts();
+  const result = await Contact.find({});
   successHelper.successfulResponse(res, result);
 };
 
