@@ -4,8 +4,6 @@ const mongooseSchemaContacts = Schema(
   {
     favorite: {
       type: Boolean,
-      required: true,
-      enum: [true, false],
       default: false,
       // minlengh: example
       // maxlength: example
