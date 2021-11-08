@@ -3,6 +3,7 @@ const getContactByIdApi = require('./getContactByIdApi');
 const getListContactsApi = require('./getListContactsApi');
 const removeContactApi = require('./removeContactApi');
 const updateContactApi = require('./updateContactApi');
+const updateStatusContactApi = require('./updateStatusContactApi');
 
 module.exports = {
   addContactApi,
@@ -10,4 +11,5 @@ module.exports = {
   getListContactsApi,
   removeContactApi,
   updateContactApi,
+  updateStatusContactApi,
 };

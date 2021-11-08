@@ -21,5 +21,9 @@ router.put(
   validation(joiSchemaContacts),
   controllerWrapper(controllers.updateContactApi),
 );
+router.patch(
+  '/:contactId/favorite',
+  controllerWrapper(controllers.updateStatusContactApi),
+);
 
 module.exports = router;
