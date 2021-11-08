@@ -25,3 +25,8 @@ app.use((err, req, res, next) => {
 });
 
 module.exports = app;
+
+// login: IK
+// password: 0c0TgKU0bOvAns4H
+// mongodb+srv://IK:0c0TgKU0bOvAns4H@cluster0.gwwdg.mongodb.net/phonebook?retryWrites=true&w=majority
+//
