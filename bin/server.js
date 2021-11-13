@@ -1,7 +1,18 @@
+const mongoose = require('mongoose');
+
 const app = require('../app');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, DB_USER, DB_USER_PASS, DB_NAME } = process.env;
 
-app.listen(PORT, () => {
-  console.log(`Server running. Use our API on port: ${PORT}`);
-});
+const DB_HOST = `mongodb+srv://${DB_USER}:${DB_USER_PASS}@cluster0.gwwdg.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
+
+mongoose
+  .connect(DB_HOST)
+  .then(() => {
+    app.listen(PORT);
+    console.log(`Database connection successful on PORT ${PORT}`);
+  })
+  .catch(error => {
+    console.log(error.message);
+    process.exit(1);
+  });

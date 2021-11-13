@@ -1,20 +1,14 @@
-const joiSchema = require('../../middlewares/validation/addValidation');
-const contactsOperations = require('../../models/contacts/index');
+const { Contact } = require('../../models');
 const successHelper = require('../../helpers/success');
 const errorsHelper = require('../../helpers/errors');
 
-const updateContactApi = () => async (req, res, next) => {
-  try {
-    const { error } = joiSchema.validate(req.body);
-    errorsHelper.badRequest(error);
-
-    const { contactId } = req.params;
-    const result = await contactsOperations.updateContact(contactId, req.body);
-    errorsHelper.notFound(result, contactId);
-    successHelper.successfulResponse(res, result);
-  } catch (error) {
-    next(error);
-  }
+const updateContactApi = async (req, res) => {
+  const { contactId } = req.params;
+  const result = await Contact.findByIdAndUpdate(contactId, req.body, {
+    new: true,
+  });
+  errorsHelper.notFound(result, contactId);
+  successHelper.successfulResponse(res, result);
 };
 
 module.exports = updateContactApi;

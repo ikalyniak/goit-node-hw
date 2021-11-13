@@ -1,14 +1,8 @@
-const { NotFound, BadRequest, Conflict } = require('http-errors');
+const { NotFound, Conflict, BadRequest } = require('http-errors');
 
 const notFound = (result, contactId) => {
   if (!result) {
     throw new NotFound(`Contact with id=${contactId} not found`);
-  }
-};
-
-const badRequest = error => {
-  if (error) {
-    throw new BadRequest(error.message);
   }
 };
 
@@ -27,8 +21,14 @@ const conflict = (req, list) => {
   });
 };
 
+const badRequest = result => {
+  if (!result.favorite) {
+    throw new BadRequest('Missing field favorite');
+  }
+};
+
 module.exports = {
   notFound,
-  badRequest,
   conflict,
+  badRequest,
 };
