@@ -5,8 +5,6 @@ const mongooseSchemaContacts = Schema(
     favorite: {
       type: Boolean,
       default: false,
-      // minlengh: example
-      // maxlength: example
     },
     name: {
       type: String,
@@ -18,19 +16,6 @@ const mongooseSchemaContacts = Schema(
     phone: {
       type: String,
     },
-    // -----example-----
-    // "sale", "stock", "promocode"
-    // status: {
-    //     type: String,
-    //     enum: ["sale", "stock", "promocode"],
-    //     default: "sale"
-    // },
-    // code: {
-    //     type: String,
-    //     required: true,
-    //     match: codeRegexp //const codeRegexp = /^[0-9]{10}$/
-    // }
-    // -----END example-----
   },
   { versionKey: false, timestamps: true },
 );

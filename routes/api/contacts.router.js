@@ -8,22 +8,22 @@ const {
   joiSchemaContacts,
 } = require('../../middlewares/validations');
 
-router.get('/', controllerWrapper(controllers.getListContactsApi));
-router.get('/:contactId', controllerWrapper(controllers.getContactByIdApi));
+router.get('/', controllerWrapper(controllers.getListContacts));
+router.get('/:contactId', controllerWrapper(controllers.getContactById));
 router.post(
   '/',
   validation(joiSchemaContacts),
-  controllerWrapper(controllers.addContactApi),
+  controllerWrapper(controllers.addContact),
 );
-router.delete('/:contactId', controllerWrapper(controllers.removeContactApi));
+router.delete('/:contactId', controllerWrapper(controllers.removeContact));
 router.put(
   '/:contactId',
   validation(joiSchemaContacts),
-  controllerWrapper(controllers.updateContactApi),
+  controllerWrapper(controllers.updateContact),
 );
 router.patch(
   '/:contactId/favorite',
-  controllerWrapper(controllers.updateStatusContactApi),
+  controllerWrapper(controllers.updateStatusContact),
 );
 
 module.exports = router;
