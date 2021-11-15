@@ -1,4 +1,5 @@
 const { Schema } = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 const mongooseSchemaUsers = Schema(
   {
@@ -19,5 +20,9 @@ const mongooseSchemaUsers = Schema(
   },
   { versionKey: false, timestamps: true },
 );
+
+mongooseSchemaUsers.methods.setPassword = function (password) {
+  this.password = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+};
 
 module.exports = mongooseSchemaUsers;

@@ -6,11 +6,11 @@ const controllerWrapper = require('../../middlewares/controllerWrapper');
 const { validation, joiSchemaUsers } = require('../../middlewares/validations');
 
 router.post(
-  '/signUp',
+  '/signup',
   validation(joiSchemaUsers),
   controllerWrapper(controllers.signUp),
 );
-router.post('/signIn', controllerWrapper(controllers.signIn));
-router.post('/signOut', controllerWrapper(controllers.signOut));
+router.post('/signin', controllerWrapper(controllers.signIn));
+router.post('/signout', controllerWrapper(controllers.signOut));
 
 module.exports = router;
