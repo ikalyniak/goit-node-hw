@@ -10,7 +10,11 @@ router.post(
   validation(joiSchemaUsers),
   controllerWrapper(controllers.signUp),
 );
-router.post('/signin', controllerWrapper(controllers.signIn));
+router.post(
+  '/signin',
+  validation(joiSchemaUsers),
+  controllerWrapper(controllers.signIn),
+);
 router.post('/signout', controllerWrapper(controllers.signOut));
 
 module.exports = router;

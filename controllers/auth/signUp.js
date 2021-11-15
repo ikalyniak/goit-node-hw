@@ -12,7 +12,7 @@ const signUp = async (req, res) => {
   const newUser = new User({ email }); // создаем новый объект через прототип, у которого есть методы полученные через mongooseSchemaUsers - setPassword()
   newUser.setPassword(password); // вызываем setPassword(), прокидываем пароль для хэширования, метод добавляет свойство password с уже хэшированным паролем
   await newUser.save(); // сохраняем
-  successHelper.successfulSignUp(res);
+  successHelper.successfulSignUp(res, newUser);
 };
 
 module.exports = signUp;

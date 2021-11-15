@@ -1,4 +1,4 @@
-const { Conflict } = require('http-errors');
+const { Unauthorized, Conflict } = require('http-errors');
 
 const conflict = (user, email) => {
   if (user) {
@@ -6,6 +6,13 @@ const conflict = (user, email) => {
   }
 };
 
+const unauthorized = (user, password) => {
+  if (!user || !user.comparePassword(password)) {
+    throw new Unauthorized('Wrong credentials');
+  }
+};
+
 module.exports = {
   conflict,
+  unauthorized,
 };
