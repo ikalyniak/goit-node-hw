@@ -16,6 +16,10 @@ const mongooseSchemaContacts = Schema(
     phone: {
       type: String,
     },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+    },
   },
   { versionKey: false, timestamps: true },
 );
