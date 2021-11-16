@@ -16,5 +16,6 @@ router.post(
   controllerWrapper(controllers.signIn),
 );
 router.post('/signout', authentication, controllerWrapper(controllers.signOut));
+router.get('/current', authentication, controllerWrapper(controllers.current));
 
 module.exports = router;
