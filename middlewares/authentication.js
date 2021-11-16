@@ -29,7 +29,7 @@ const auth = async (req, res, next) => {
     const { id } = jwt.verify(token, SECRET_KEY);
     // const user = await User.findById(id, 'id email subscription');
     const user = await User.findById(id);
-    if (!user) {
+    if (!user || !user.token) {
       throw new Unauthorized();
     }
     req.user = user;

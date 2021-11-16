@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const { auth: controllers } = require('../../controllers');
-const controllerWrapper = require('../../middlewares/controllerWrapper');
+const { authentication, controllerWrapper } = require('../../middlewares');
 const { validation, joiSchemaUsers } = require('../../middlewares/validations');
 
 router.post(
@@ -15,6 +15,6 @@ router.post(
   validation(joiSchemaUsers),
   controllerWrapper(controllers.signIn),
 );
-router.post('/signout', controllerWrapper(controllers.signOut));
+router.post('/signout', authentication, controllerWrapper(controllers.signOut));
 
 module.exports = router;

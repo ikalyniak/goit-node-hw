@@ -19,7 +19,10 @@ const successfulSignIn = (response, token, { email }) => {
   });
 };
 
+const successfulSignOut = response => response.status(204).json();
+
 module.exports = {
   successfulSignUp,
   successfulSignIn,
+  successfulSignOut,
 };
