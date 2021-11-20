@@ -2,7 +2,7 @@ const { Contact } = require('../../models');
 const successHelper = require('../../helpers/success');
 const errorsHelper = require('../../helpers/errors');
 
-const updateStatusContactApi = async (req, res) => {
+const updateStatusContact = async (req, res) => {
   const { contactId } = req.params;
   const { favorite } = req.body;
   const result = await Contact.findByIdAndUpdate(
@@ -16,4 +16,4 @@ const updateStatusContactApi = async (req, res) => {
   successHelper.successfulResponse(res, result);
 };
 
-module.exports = updateStatusContactApi;
+module.exports = updateStatusContact;
