@@ -17,5 +17,10 @@ router.post(
 );
 router.post('/signout', authentication, controllerWrapper(controllers.signOut));
 router.get('/current', authentication, controllerWrapper(controllers.current));
+router.patch(
+  '/avatars',
+  authentication,
+  controllerWrapper(controllers.updateAvatar),
+);
 
 module.exports = router;
