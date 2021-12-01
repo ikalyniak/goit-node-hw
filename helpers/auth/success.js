@@ -26,7 +26,7 @@ const successfulAvatarUpdate = (response, src) => {
     status: 'success',
     code: 201,
     data: {
-      newAvatar: src,
+      avatarURL: src,
     },
   });
 };
