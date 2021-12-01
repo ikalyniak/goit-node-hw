@@ -21,8 +21,19 @@ const successfulSignIn = (response, token, { email }) => {
 
 const successfulSignOut = response => response.status(204).json();
 
+const successfulAvatarUpdate = (response, src) => {
+  response.status(201).json({
+    status: 'success',
+    code: 201,
+    data: {
+      newAvatar: src,
+    },
+  });
+};
+
 module.exports = {
   successfulSignUp,
   successfulSignIn,
   successfulSignOut,
+  successfulAvatarUpdate,
 };
