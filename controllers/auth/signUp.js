@@ -1,4 +1,5 @@
 const gravatar = require('gravatar');
+const { v4 } = require('uuid');
 
 const { User } = require('../../models');
 const errorsHelper = require('../../helpers/auth/errors');
@@ -11,7 +12,8 @@ const signUp = async (req, res) => {
   const user = await User.findOne({ email });
   errorsHelper.conflict(user, email);
 
-  const newUser = new User({ email, avatarURL });
+  const verificationToken = v4();
+  const newUser = new User({ email, verificationToken, avatarURL });
   newUser.setPassword(password);
   await newUser.save();
   successHelper.successfulSignUp(res, newUser);
