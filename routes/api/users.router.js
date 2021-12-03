@@ -2,7 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 const { auth: controllers } = require('../../controllers');
-const { authentication, controllerWrapper } = require('../../middlewares');
+const {
+  authentication,
+  controllerWrapper,
+  upload,
+} = require('../../middlewares');
 const { validation, joiSchemaUsers } = require('../../middlewares/validations');
 
 router.post(
@@ -17,5 +21,11 @@ router.post(
 );
 router.post('/signout', authentication, controllerWrapper(controllers.signOut));
 router.get('/current', authentication, controllerWrapper(controllers.current));
+router.patch(
+  '/avatars',
+  authentication,
+  upload.single('avatar'),
+  controllerWrapper(controllers.updateAvatar),
+);
 
 module.exports = router;
