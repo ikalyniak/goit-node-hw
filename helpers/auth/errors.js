@@ -7,7 +7,7 @@ const conflict = (user, email) => {
 };
 
 const unauthorized = (user, password) => {
-  if (!user || !user.comparePassword(password)) {
+  if (!user || !user.verify || !user.comparePassword(password)) {
     throw new Unauthorized('Wrong credentials');
   }
 };
