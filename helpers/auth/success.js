@@ -2,7 +2,7 @@ const successfulSignUp = (response, { email }) => {
   response.status(201).json({
     status: 'success',
     code: 201,
-    message: `Registration User with email ${email} completed successfully`,
+    message: `User registration with email ${email} completed successfully`,
     subscription: 'starter',
   });
 };
@@ -31,9 +31,16 @@ const successfulAvatarUpdate = (response, src) => {
   });
 };
 
+const successfulVerification = response => {
+  response.json({
+    message: 'User verification completed successfully',
+  });
+};
+
 module.exports = {
   successfulSignUp,
   successfulSignIn,
   successfulSignOut,
   successfulAvatarUpdate,
+  successfulVerification,
 };
